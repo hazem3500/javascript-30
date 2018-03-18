@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+  const pressed = [];
+  const secretCode = 'ozprince';
+
+  window.addEventListener('keyup', (e) => {
+    pressed.push(e.key);
+    if (pressed.length == 9){
+      pressed.splice(0,1);
+    }
+    console.log(pressed.join(""));
+    if (pressed.join("") == secretCode){
+      console.log("Yaaaay");
+      cornify_add();
+    };
+  })
+</script>
+</body>
+</html>
