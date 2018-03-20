@@ -8,8 +8,6 @@ Grab the course at [https://JavaScript30.com](https://JavaScript30.com)
 
 ## Community #JavaScript30 Content
 
-* [01 - JS DRUM KITS](//./../01 - JavaScript Drum Kit/index-START.html)
-
 Feel free to submit a PR adding a link to your own recaps, guides or reviews!
 
 * [Arjun Khode’s blog](http://thesagittariusme.blogspot.com/search/label/JS30) about summaries for each day, including fixed glitches, bugs and extra features
