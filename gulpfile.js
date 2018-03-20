@@ -22,7 +22,7 @@ gulp.task('styles', () => {
 
 gulp.task('scripts', () => {
     gulp
-        .src(['./**/app.js', '!./node_modules/**/*.js'])
+        .src(['./**/app.js', '!./node_modules/**/*.js', '!./gulpfile.js'])
         .pipe(customPlumber())
         .pipe(
             babel({
