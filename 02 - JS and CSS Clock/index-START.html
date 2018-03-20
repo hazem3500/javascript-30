@@ -8,21 +8,26 @@
 
 <body>
 
-
   <div class="clock">
     <div class="clock-face">
+      <div class="clock-center"></div>
       <div class="hand hour-hand"></div>
       <div class="hand min-hand"></div>
       <div class="hand second-hand"></div>
+    </div>
+    <div class="digital-clock">
+      <span class="digital-hour">1</span>
+      <span>:</span>
+      <span class="digital-minute">20</span>
     </div>
   </div>
 
 
   <style>
+    @import url('https://fonts.googleapis.com/css?family=Bungee');
+
     html {
-      background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
       background-size: cover;
-      font-family: 'helvetica neue';
       text-align: center;
       font-size: 10px;
     }
@@ -34,6 +39,9 @@
       flex: 1;
       min-height: 100vh;
       align-items: center;
+      background: linear-gradient(146deg, #00e4ff, #44b9bf, #102867);
+      background-size: 600% 600%;
+      animation: clockBackground 15s ease infinite;
     }
 
     .clock {
@@ -41,6 +49,7 @@
       height: 30rem;
       border: 20px solid white;
       border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
       margin: 50px auto;
       position: relative;
       padding: 2rem;
@@ -58,10 +67,31 @@
       /* account for the height of the clock hands */
     }
 
+    .digital-clock {
+      margin-top: 80px;
+      text-align: center;
+      font-size: 7rem;
+      font-family: 'Bungee', cursive;
+      color: white;
+      background: rgba(26, 67, 119, 0.1);
+    }
+
+    .clock-center {
+      position: absolute;
+      width: 3rem;
+      height: 3rem;
+      top: 45%;
+      left: 45%;
+      z-index: 2;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
+    }
+
     .hand {
       width: 50%;
-      height: 6px;
-      background: black;
+      height: 10px;
+      background: rgb(38, 104, 131);
       position: absolute;
       top: 50%;
       transform-origin: 100%;
@@ -69,30 +99,51 @@
       transition: all 0.05s;
       transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
+
+    @keyframes clockBackground {
+      0% {
+        background-position: 13% 0%
+      }
+      50% {
+        background-position: 88% 100%
+      }
+      100% {
+        background-position: 13% 0%
+      }
+    }
   </style>
-
   <script>
-    const secHand = document.querySelector(".second-hand");
-    const minHand = document.querySelector(".min-hand");
-    const hourHand = document.querySelector(".hour-hand");
+    const hourHand = document.querySelector('.hour-hand');
+    const hourDigital = document.querySelector('.digital-hour');
 
-    function setDate(){
-      const time = new Date();
-      console.log(time);
-      const sec = time.getSeconds();
-      const min = time.getMinutes();
-      const hour = time.getHours();
+    const minuteHand = document.querySelector('.min-hand');
+    const minuteDigital = document.querySelector('.digital-minute');
 
-      const secDeg = ((sec / 60) * 360) + 90;
-      const minDeg = ((min / 60) * 360) + 90;
-      const hourDeg = ((hour / 12) * 360) + 90;
+    const secondHand = document.querySelector('.second-hand');
 
-      secHand.style.transform = `rotate(${secDeg}deg)`;
-      minHand.style.transform = `rotate(${minDeg}deg)`;
-      hourHand.style.transform = `rotate(${hourDeg}deg)`;
+    function setDate() {
+      const now = new Date;
+
+      const hours = now.getHours();
+      const hoursDegrees = (hours / 12) * 360 + 90;
+      hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+      hourDigital.innerHTML = hours % 12;
+
+
+      const minutes = now.getMinutes();
+      const minutesDegrees = (minutes / 60) * 360 + 90;
+      minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+      minuteDigital.innerHTML = (minutes < 9) ? `0${minutes}` : minutes;
+
+      const seconds = now.getSeconds();
+      const secondsDegrees = (seconds / 60) * 360 + 90;
+      secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+
     }
 
     setInterval(setDate, 1000);
+
   </script>
 </body>
 
