@@ -1,0 +1,31 @@
+{
+  "name": "javascript30",
+  "version": "1.0.0",
+  "description": "![](https://javascript30.com/images/JS3-social-share.png)",
+  "main": "index.js",
+  "dependencies": {
+    "eslint-config-airbnb": "^15.0.2",
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hazem3500/javascript-30.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hazem3500/javascript-30/issues"
+  },
+  "homepage": "https://github.com/hazem3500/javascript-30#readme"
+}
