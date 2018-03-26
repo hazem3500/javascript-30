@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Console Tricks!</title>
 </head>
+
 <body>
 
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
@@ -18,29 +20,69 @@
     }
 
     // Regular
+    console.log('Hello');
 
     // Interpolated
+    console.log('I am a %s String!', '💩');
 
     // Styled
+    console.log('%c I am a big Red text', 'font-size: 30px; background-color: yellow; color: red;');
 
     // warning!
+    console.warn('Oh No!');
 
     // Error :|
+    console.error('Shitzu!');
 
     // Info
+    console.info('potatoes are the wisest plants.');
 
     // Testing
+    console.assert(1 == 2, 'That is wrong!');
 
     // clearing
+    // console.clear();
 
     // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.dir(p);
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    console.count('potato');
+    console.count('potato');
+    console.count('banana');
+    console.count('potato');
+    console.count('potato');
+    console.count('banana');
+    console.count('banana');
+    console.count('banana');
+    console.count('banana');
+    console.count('potato');
+    console.count('potato');
+    console.count('banana');
+    console.count('banana');
+    console.count('banana');
+    console.count('potato');
+    console.count('potato');
 
     // timing
+    console.time('Doing something important');
+    setTimeout(() => {
+      console.timeEnd('Doing something important');
+    }, 5000);
 
+    // table
+    console.table(dogs);
   </script>
 </body>
+
 </html>
