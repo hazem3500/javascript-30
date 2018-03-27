@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Hold Shift to Check Multiple Checkboxes</title>
 </head>
+
 <body>
   <style>
-
     html {
       font-family: sans-serif;
-      background:#ffc600;
+      background: #ffc600;
     }
 
     .inbox {
-      max-width:400px;
-      margin:50px auto;
-      background:white;
-      border-radius:5px;
-      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
     }
 
     .item {
-      display:flex;
-      align-items:center;
+      display: flex;
+      align-items: center;
       border-bottom: 1px solid #F1F1F1;
     }
 
     .item:last-child {
-      border-bottom:0;
+      border-bottom: 0;
     }
 
 
-    input:checked + p {
-      background:#F9F9F9;
+    input:checked+p {
+      background: #F9F9F9;
       text-decoration: line-through;
     }
 
     input[type="checkbox"] {
-      margin:20px;
+      margin: 20px;
     }
 
     p {
-      margin:0;
-      padding:20px;
-      transition:background 0.2s;
-      flex:1;
-      font-family:'helvetica neue';
+      margin: 0;
+      padding: 20px;
+      transition: background 0.2s;
+      flex: 1;
+      font-family: 'helvetica neue';
       font-size: 20px;
       font-weight: 200;
       border-left: 1px solid #D1E2FF;
     }
-
-
   </style>
-   <!--
+  <!--
    The following is a common layout you would see in an email client.
 
    When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
@@ -98,33 +97,25 @@
     </div>
   </div>
 
-<script>
-  let shiftDown = false;
-  let initialBox = 0;
-  let currentBox = 0;
-  const checkBoxes = document.querySelectorAll(".inbox input[type='checkbox']");
+  <script>
+    let initialBox;
+    const checkBoxes = document.querySelectorAll(".inbox input[type='checkbox']");
 
-  function holdCheck(e){
-    let index = Array.prototype.indexOf.call(this.parentNode.parentNode.children, this.parentNode);
-    currentBox = index;
-    if (!shiftDown){
-      initialBox = index;
-      return;
+    function handleCheck(e) {
+      if (e.shiftKey && this.checked) {
+        let startCheck = false;
+        checkBoxes.forEach(checkbox => {
+          if (startCheck) checkbox.checked = true;
+          if (checkbox === initialBox || checkbox === this) startCheck = !startCheck;
+        });
+      }
+      initialBox = this;
     }
-    if (initialBox > currentBox) [initialBox,currentBox] = [currentBox, initialBox];
-    for(let i = initialBox + 1; i < currentBox; i++){
-      checkBoxes[i].checked = true;
-    }
-  }
 
-  checkBoxes.forEach(box => box.addEventListener('change', holdCheck));
+    checkBoxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 
-  document.addEventListener('keydown',(key) => {
-    if (key.keyCode == 16) shiftDown = true;});
 
-  document.addEventListener('keyup',(key) => {
-    if (key.keyCode == 16) shiftDown = false;});
-
-</script>
+  </script>
 </body>
+
 </html>
