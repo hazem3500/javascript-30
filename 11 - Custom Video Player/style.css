@@ -27,12 +27,15 @@ body {
   position: relative;
   font-size: 0;
   overflow: hidden;
+  transition: all 0.1s ease-out;
 }
 
 /* This css is only applied when fullscreen is active. */
-.player:fullscreen {
+.player--fullscreen {
   max-width: none;
-  width: 100%;
+  width: 100vw;
+  max-height: 100vh;
+  box-shadow: 0 0 10px 500px rgba(0,0,0,0.4);
 }
 
 .player:-webkit-full-screen {
@@ -58,6 +61,11 @@ body {
 
 .player__button:focus {
   border: 2px solid rgb(130, 141, 241);
+}
+
+.player__fullscreen img{
+  height: 100%;
+  width: 50%;
 }
 
 .player__slider {
@@ -103,7 +111,7 @@ body {
   width:50%;
   background:rgb(221, 52, 185);
   flex:0;
-  flex-basis:50%;
+  flex-basis: 0;
 }
 
 /* unholy css to style input type="range" */
