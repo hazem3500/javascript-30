@@ -42,7 +42,8 @@
     let walk = 20;
     function shadow(e) {
       const { offsetWidth: width, offsetHeight: height } = hero;
-      let { offsetX: x, offsetY: y } = e;
+      let x = e.offsetX || e.touches[0].pageX;
+      let y = e.offsetY || e.touches[0].pageY;
       if (this !== e.target) {
         x = x + e.target.offsetLeft;
         y = y + e.target.offsetTop;
@@ -59,6 +60,7 @@
     }
 
     hero.addEventListener('mousemove', shadow);
+    hero.addEventListener('touchmove', shadow);
   </script>
 </body>
 
