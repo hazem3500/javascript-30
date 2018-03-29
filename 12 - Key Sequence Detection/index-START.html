@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Key Detection</title>
-  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+  <title>POTATOES🥔??</title>
+  <script type="text/javascript" src="./potatoify.js"></script>
 </head>
-<body>
-<script>
-  const pressed = [];
-  const secretCode = 'ozprince';
 
-  window.addEventListener('keyup', (e) => {
-    pressed.push(e.key);
-    if (pressed.length == 9){
-      pressed.splice(0,1);
-    }
-    console.log(pressed.join(""));
-    if (pressed.join("") == secretCode){
-      console.log("Yaaaay");
-      cornify_add();
-    };
-  })
-</script>
+<body>
+  <script>
+    const pressed = [];
+    const secretCode = 'potatoes';
+
+    console.log(`%c DON'T ENTER THE SECRET CODE!!`, 'font-size: 42px; background-color: red; color: black;');
+
+    window.addEventListener('keyup', (e) => {
+      pressed.push(e.key);
+      if (pressed.length === 9) {
+        pressed.splice(0, 1);
+      }
+      console.log(pressed.join(""));
+      if (pressed.join("") == secretCode) {
+        console.log("Yaaaay");
+        addPotato();
+      };
+    })
+  </script>
 </body>
+
 </html>
