@@ -23,25 +23,28 @@ function redEffect(pixels) {
 function rgbSplit(pixels) {
     for (let i = 0; i < pixels.data.length; i += 4) {
         pixels.data[i + 150] = pixels.data[i + 0]; // red
-        pixels.data[i + 500] = pixels.data[i + 1]; // green
-        pixels.data[i + 550] = pixels.data[i + 2]; // blue
+        pixels.data[i + 100] = pixels.data[i + 1]; // green
+        pixels.data[i + 150] = pixels.data[i + 2]; // blue
     }
     return pixels;
 }
 
 function invert(pixels) {
-    for (let i = 0; i < pixels.data.length; i += 4) {
-        pixels.data[i + 0] = pixels.data[pixels.data.length - 1 - i + 0]; // red
-        pixels.data[i + 1] = pixels.data[pixels.data.length - 1 - i + 1]; // green
-        pixels.data[i + 2] = pixels.data[pixels.data.length - 1 - i + 2]; // blue
+    for (let i = 0; i < pixels.data.length/2; i += 4) {
+        [pixels.data[i + 0], pixels.data[pixels.data.length - 1 - i + 3]] 
+            = [pixels.data[pixels.data.length - 1 - i + 3], pixels.data[i + 0]] ; // red
+        [pixels.data[i + 1], pixels.data[pixels.data.length - 1 - i + 2]]
+            = [pixels.data[pixels.data.length - 1 - i + 2], pixels.data[i + 1]]; // green
+        [pixels.data[i + 2], pixels.data[pixels.data.length - 1 - i + 1]]
+            = [pixels.data[pixels.data.length - 1 - i + 1], pixels.data[i + 2]]; // blue
+        [pixels.data[i + 3], pixels.data[pixels.data.length - 1 - i + 0]]
+            = [pixels.data[pixels.data.length - 1 - i + 0], pixels.data[i + 3]]; // alpha
     }
     return pixels;
 }
 
 function blur(pixels) {
-    for (let i = 0; i < pixels.data.length; i += 4) {
-        pixels.data[i + 3] = 50; // alpha
-    }
+    ctx.globalAlpha = 0.1;
     return pixels;
 }
 
@@ -78,7 +81,7 @@ let mode = normal;
 function getVideo() {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         .then(localMediaStream => {
-            video.src = HTMLMediaElement.srcObject(localMediaStream);
+            video.src = window.URL.createObjectURL(localMediaStream);
             video.play();
         }).catch(err => console.error(err));
 }
@@ -91,6 +94,7 @@ function drawToCanvas() {
 
     return setInterval(() => {
         ctx.drawImage(video, 0, 0, width, height);
+        ctx.globalAlpha = 1;
         // take pixels out
         let pixels = ctx.getImageData(0, 0, width, height);
         // add filters
@@ -108,7 +112,7 @@ function takePhoto() {
     const link = document.createElement('a');
     link.href = data;
     link.setAttribute('download', 'handsome');
-    link.textContent = 'Download Image';
+    link.innerHTML = `<img src="${data}" alt=""Handsome Potato/>`;
     strip.insertBefore(link, strip.firstChild);
 }
 
@@ -117,7 +121,7 @@ getVideo();
 video.addEventListener('canplay', drawToCanvas);
 
 filters.forEach(filter => filter.addEventListener('click', (e) => {
-    const tempMode = e.dataset.mode;
+    const tempMode = e.target.dataset.mode;
     switch (tempMode) {
         case 'normal':
             mode = normal;

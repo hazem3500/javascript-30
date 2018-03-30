@@ -13,7 +13,7 @@ html {
 
 .photobooth {
   background:white;
-  max-width:150rem;
+  max-width: 60vw;
   margin: 2rem auto;
   border-radius:2px;
 }
