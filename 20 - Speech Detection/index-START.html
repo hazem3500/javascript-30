@@ -1,19 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Speech Detection</title>
+  <script type="text/javascript" src="./potatoify.js"></script>
 </head>
-<body>
 
-  <div class="words" contenteditable>
+<body>
+  <div class="black-screen">
+    <div class="words" contenteditable></div>
   </div>
 
-<script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  <script>
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
 
-</script>
+    const blackScreen = document.body.querySelector('.black-screen');
+
+    let p = document.createElement('p');
+    const words = document.querySelector('.words');
+    words.appendChild(p);
+
+    recognition.addEventListener('result', e => {
+      let transcript = Array.from(e.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('');
+      console.log(transcript);
+
+      if (transcript.includes('add potato')) {
+        addPotato();
+      }
+      if (transcript.includes('poop')) {
+        transcript = transcript.replace(/poop/ig, '💩');
+      }
+      if (transcript.includes('a lot of sweet potato')) {
+        transcript = transcript.replace(/.*/ig, '🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠🍠');
+      }
+      if (transcript.includes('sweet potato')) {
+        transcript = transcript.replace(/sweet potato/ig, '🍠');
+      }
+      if (transcript.includes('a lot of potato')) {
+        transcript = transcript.replace(/.*/ig, '🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔🥔');
+      }
+      if (transcript.includes('potato')) {
+        transcript = transcript.replace(/potato/ig, '🥔');
+      }
+      if (transcript.includes('expelliarmus')) {
+        transcript = transcript.replace(/$/, '⚡🌟');
+      }
+      if (transcript.includes('Knox')) {
+        transcript = transcript.replace(/knox/ig, 'nox⚫');
+        blackScreen.style.background = 'rgba(0, 0, 0, 1)';
+      }
+      if (transcript.includes('lumos maxima')) {
+        transcript = transcript.replace(/$/, '💡');
+        blackScreen.style.background = 'rgba(0, 0, 0, 0)';
+      }
+      if (transcript.includes('wingardium Leviosa')) {
+        transcript = transcript.replace(/$/, '✨');
+        words.style.animation = 'leviosa 4s ease-in-out';
+      }
+      p.textContent = transcript;
+      if (e.results[0].isFinal) {
+        p = document.createElement('p');
+        words.appendChild(p);
+      }
+    });
+
+    recognition.addEventListener('end', recognition.start);
+    recognition.start();
+
+    words.addEventListener('animationend', () => words.style.animation = '');
+  </script>
 
 
   <style>
@@ -22,24 +84,27 @@
     }
 
     body {
-      background:#ffc600;
+      background: #ffc600;
       font-family: 'helvetica neue';
       font-weight: 200;
       font-size: 20px;
     }
 
     .words {
-      max-width:500px;
-      margin:50px auto;
-      background:white;
-      border-radius:5px;
-      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
-      padding:1rem 2rem 1rem 5rem;
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+      padding: 1rem 2rem 1rem 5rem;
       background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
       background-size: 100% 3rem;
       position: relative;
-      line-height:3rem;
+      line-height: 3rem;
+      z-index: 99999;
+      transform-origin: 50% 50%;
     }
+
     p {
       margin: 0 0 3rem;
     }
@@ -54,7 +119,30 @@
       border: 1px solid;
       border-color: transparent #efe4e4;
     }
+
+    .black-screen {
+      transition: all 1s ease-out;
+      background: rgba(0, 0, 0, 0);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      min-height: 100vh;
+    }
+
+    @keyframes leviosa {
+      0% {
+        transform: rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg) scale(1);
+      }
+      50% {
+        transform: rotate3d(1, 0, 0, -180deg) rotate3d(0, 1, 0, -180deg) scale(2);
+      }
+      100% {
+        transform: rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, -360deg) scale(1);
+      }
+    }
   </style>
 
 </body>
+
 </html>

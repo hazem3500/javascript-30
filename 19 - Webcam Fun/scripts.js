@@ -78,14 +78,13 @@ let mode = normal;
 function getVideo() {
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         .then(localMediaStream => {
-            video.src = HTMLMediaElement.srcObject(localMediaStream);
+            video.src = window.URL.createObjectURL(localMediaStream);
             video.play();
         }).catch(err => console.error(err));
 }
 
 function drawToCanvas() {
-    const width = video.videoWidth;
-    const height = video.videoHeight;
+    const { width, height } = video;
     canvas.width = width;
     canvas.height = height;
 
