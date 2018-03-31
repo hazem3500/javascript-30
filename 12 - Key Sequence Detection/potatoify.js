@@ -5,7 +5,6 @@ const potatoUrl = ['https://orig00.deviantart.net/b707/f/2014/104/4/a/kawaii_mas
     'https://orig00.deviantart.net/f328/f/2017/307/0/0/webp_net_gifmaker__16__by_partybug98-dbsn8bi.gif', 'https://media.giphy.com/media/5FFRyH39kzw0U/giphy.gif', 'http://78.media.tumblr.com/74e8e869b99a2411a722cc1dfa5880e9/tumblr_n4zunixsFi1r5ye5io1_500.gif', 'http://i.imgur.com/Zp8iYfq.gif', 'https://www.littlepotatoes.com/wp-content/uploads/2015/08/fingerling.-3.gif', 'https://orig13.deviantart.net/3a48/f/2015/223/3/c/untitled_drawing_by_ripperfangs-d95ab0w.png', 'http://78.media.tumblr.com/tumblr_me4lr36XdW1qenbiv.gif', 'https://www.littlepotatoes.com/wp-content/uploads/2015/08/gold-2.gif', 'http://doce.ginpu.us/wp-content/uploads/2013/04/finished.gif', 'http://www.ooze.com/ooze13/images/pentagon/potato.gif'];
 
 let potatoCount = 0;
-const potatoItems = document.getElementsByClassName('potato');
 
 const cornifyUpdateCount = () => {
     let p = document.getElementById('cornifycount');
@@ -20,7 +19,8 @@ const cornifyUpdateCount = () => {
         p.style.color = '#ffc284';
         p.style.textAlign = 'center';
         p.style.fontSize = '32px';
-        p.style.fontFamily = "'Comic Sans MS', 'Comic Sans', 'Marker Felt', serif";
+        p.style.fontFamily =
+            "'Comic Sans MS', 'Comic Sans', 'Marker Felt', serif";
         const body = document.querySelector('body');
         body.appendChild(p);
     }

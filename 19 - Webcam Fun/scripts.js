@@ -30,9 +30,9 @@ function rgbSplit(pixels) {
 }
 
 function invert(pixels) {
-    for (let i = 0; i < pixels.data.length/2; i += 4) {
-        [pixels.data[i + 0], pixels.data[pixels.data.length - 1 - i + 3]] 
-            = [pixels.data[pixels.data.length - 1 - i + 3], pixels.data[i + 0]] ; // red
+    for (let i = 0; i < pixels.data.length / 2; i += 4) {
+        [pixels.data[i + 0], pixels.data[pixels.data.length - 1 - i + 3]]
+            = [pixels.data[pixels.data.length - 1 - i + 3], pixels.data[i + 0]]; // red
         [pixels.data[i + 1], pixels.data[pixels.data.length - 1 - i + 2]]
             = [pixels.data[pixels.data.length - 1 - i + 2], pixels.data[i + 1]]; // green
         [pixels.data[i + 2], pixels.data[pixels.data.length - 1 - i + 1]]
