@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Understanding JavaScript's Capture</title>
 </head>
+
 <body class="bod">
 
   <div class="one">
@@ -13,33 +15,48 @@
     </div>
   </div>
 
-<style>
-  html {
-    box-sizing: border-box;
-  }
-  *, *:before, *:after { box-sizing: inherit; }
+  <style>
+    html {
+      box-sizing: border-box;
+    }
 
-  div {
-    width:100%;
-    padding:100px;
-  }
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
 
-  .one {
-    background: thistle;
-  }
+    div {
+      width: 100%;
+      padding: 100px;
+    }
 
-  .two {
-    background:mistyrose;
-  }
+    .one {
+      background: thistle;
+    }
 
-  .three {
-    background:coral;
-  }
-</style>
+    .two {
+      background: mistyrose;
+    }
 
-<button></button>
-<script>
+    .three {
+      background: coral;
+    }
+  </style>
 
-</script>
+  <button>this is a button</button>
+  <script>
+    const divs = document.querySelectorAll('div');
+    const btn = document.querySelector('button');
+
+    function logText(e) {
+      console.log(this.classList.value);
+      e.stopPropagation();
+    }
+
+    divs.forEach(div => div.addEventListener('click', logText));
+    btn.addEventListener('click', () => console.log('button pressed'), { once: true });
+  </script>
 </body>
+
 </html>
