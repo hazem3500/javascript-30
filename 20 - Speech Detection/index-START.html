@@ -60,6 +60,10 @@
         transcript = transcript.replace(/$/, '💡');
         blackScreen.style.background = 'rgba(0, 0, 0, 0)';
       }
+      if (transcript.includes('banana')) {
+        transcript = transcript.replace(/banana/ig, '🍌');
+        blackScreen.style.background = 'rgba(0, 0, 0, 0)';
+      }
       if (transcript.includes('wingardium Leviosa')) {
         transcript = transcript.replace(/$/, '✨');
         words.style.animation = 'leviosa 4s ease-in-out';
