@@ -34,10 +34,33 @@ ul {
 }
 
 .title-30 {
+    position: relative;
+    transition: all 0.4s ease-out;
+}
+
+.title-30-main {
     color: #5961F9;
     background: -webkit-linear-gradient(#EE9AE5, #5961F9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.title-30-shadow {
+    position: absolute;
+    top: 0;
+    color: rgba(0, 0, 0, 0.1);
+    opacity: 0.6;
+    z-index: -1;
+    text-shadow: 0 0 1rem #DF5ED4;
+    transition: text-shadow 0.4s ease-out;
+}
+
+.title-30:hover .title-30-shadow {
+    text-shadow: 0 0 2rem rgba(223, 94, 212, 0.8);
+}
+
+.title-30:hover {
+    transform: scale(1.2);
 }
 
 .days {
