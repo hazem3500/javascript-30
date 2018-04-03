@@ -67,3 +67,12 @@ h1 {
 .hole.up .mole {
   top:0;
 }
+
+.start-btn {
+  display: block;
+  margin: 50px auto;
+  padding: 20px 30px;
+  font-family: cursive;
+  font-size: 2.5rem;
+  font-weight: 900;
+}
